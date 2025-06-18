@@ -3,16 +3,16 @@
 #include <time.h>
 
 int main() {
-    int vet[10], aux;
+    int vet[10], i, j, aux;
     int tamanho = sizeof(vet) / sizeof(vet[0]);
     
-    for (int i = 0; i < tamanho; i++) {
+    for (i = 0; i < tamanho; i++) {
         vet[i] = rand()%100;
         printf("%d " ,vet[i]);
     }    
     
-    for (int i = 0; i < tamanho; i++) {
-        for (int j = i; j < tamanho; j++) {
+    for (i = 0; i < tamanho; i++) {
+        for (j = i; j < tamanho; j++) {
             if (vet[i] > vet[j + 1]) {
                 aux = vet[i];
                 vet[i] = vet[j + 1];
@@ -20,11 +20,12 @@ int main() {
             }
         }
     }
-
-    for (int i = 0; i < tamanho; i++) {
+    printf("\n");
+    for (i = 0; i < tamanho; i++) {
         printf("%d ", vet[i]);
     }
     printf("\n");
 
     return 0;
 }
+
