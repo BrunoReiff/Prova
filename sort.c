@@ -4,7 +4,7 @@
 
 int main() {
     int vet[10], aux;
-    int tamanho = sinzeof(vet) / sizeof(vet[0]);
+    int tamanho = sizeof(vet) / sizeof(vet[0]);
     
     for (int i = 0; i < tamanho; i++) {
         vet[i] = rand()%100;
@@ -21,7 +21,7 @@ int main() {
         }
     }
 
-    for (i = 0; i < tamanho; i++) {
+    for (int i = 0; i < tamanho; i++) {
         printf("%d ", vet[i]);
     }
     printf("\n");
