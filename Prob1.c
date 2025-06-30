@@ -1,26 +1,37 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
+int ledPin = 9;
+int potPin = A0;
+int buttonPin = 2;
+int potValue, delayTime;
+bool ligado;
 
-int main()
-{
-    int U[3], V[3], somatorio = 0;
-    printf("Inclua, um a um, os valores do vetor U:\n");
-    for (int i = 0; i < 3; i++)
-    {
-        scanf("%d", &U[i]);
-    }
-    printf("\nInclua, um a um, os valores do vetor V:\n");
-    for (int i = 0; i < 3; i++)
-    {
-        scanf("%d", &V[i]);
-    }
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(potPin, INPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
+  Serial.begin(9600);
+}
 
-    for (int i = 0; i < 3; i++)
-    {
-        somatorio += 3*V[i]-2*U[2-i];
-    }
-    printf("O valor do somatorio eh: %d", somatorio);    
-    return 0;
+void loop() {
+  if (digitalRead(buttonPin) == LOW) {
+    ligado = !ligado;
+    delay(300); 
+  }
+
+  if (ligado) {
+    potValue = analogRead(potPin);
+    delayTime = map(potValue, 0, 1023, 100, 2000);
+
+    digitalWrite(ledPin, HIGH);
+    delay(200);
+    digitalWrite(ledPin, LOW);
+    delay(delayTime);
+
+    Serial.print("Pot: ");
+    Serial.print(potValue);
+    Serial.print(" | Interval: ");
+    Serial.println(delayTime);
+  } else {
+    digitalWrite(ledPin, LOW);
+  }
+  delay(50);
 }
